@@ -1,0 +1,17 @@
+.mvn/
+log/
+target/
+
+.idea/*
+!.idea/misc.xml
+*.iml
+*.iws
+
+.DS_Store/
+
+*.class
+*.war
+*.ear
+
+/bin/
+/out/
