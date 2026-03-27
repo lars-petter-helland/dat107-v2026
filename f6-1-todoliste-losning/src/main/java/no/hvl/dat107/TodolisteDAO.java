@@ -1,0 +1,99 @@
+package no.hvl.dat107;
+
+import java.util.List;
+import java.util.Map;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+
+public class TodolisteDAO {
+
+	private EntityManagerFactory emf;
+
+	public TodolisteDAO() {
+		emf = Persistence.createEntityManagerFactory("todosPU");
+
+	}
+
+	public Todoliste hentListe(int id) {
+		EntityManager em = emf.createEntityManager();
+		try {
+
+			return em.find(Todoliste.class, id);
+
+		} finally {
+			em.close();
+		}
+	}
+
+	public void lagreNyListe(Todoliste nyListe) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			
+			em.persist(nyListe);
+			
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	public void oppdaterListe(Todoliste oppdatertListe) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			
+			em.merge(oppdatertListe);
+			
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	public void slettListe(int id) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+
+			//TODO Fyll inn manglende kode for å slette liste
+
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+	}
+
+	public Todoliste hentListeMedNavn(String navn) {
+
+		EntityManager em = emf.createEntityManager();
+		try {
+
+			return null; //TODO Fyll inn manglende kode for å hente liste med gitt navn
+						 //  Unntakshåndtering? Returnere null om ikke finnes? ...
+
+		} finally {
+			em.close();
+		}
+	}
+
+}
